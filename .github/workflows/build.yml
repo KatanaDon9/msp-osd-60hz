@@ -1,23 +1,16 @@
-on:
-    push:
-      branches: [main, master]
-    workflow_dispatch:
+  on: [push]
   jobs:
     build:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v2
         - uses: nttld/setup-ndk@v1
-          id: setup-ndk
           with:
             ndk-version: r23b
-        - name: Build
+        - run: export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH && make ipk
           env:
             ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
-          run: |
-            export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
-            make ipk
         - uses: actions/upload-artifact@v4
           with:
-            name: msp-osd-60hz-ipk
+            name: build
             path: ./ipk/*.ipk
