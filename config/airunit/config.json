@@ -1,0 +1,7 @@
+{
+    "fast_serial": true,
+    "cache_serial": true,
+    "osd_update_rate_hz": 60,
+    "compress_osd": true,
+    "disable_betaflight_hd": false
+}
