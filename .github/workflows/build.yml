@@ -7,7 +7,7 @@
         - uses: nttld/setup-ndk@v1
           with:
             ndk-version: r23b
-        - run: export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH && make ipk
+        - run: ndk-build
           env:
             ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
         - uses: actions/upload-artifact@v4
